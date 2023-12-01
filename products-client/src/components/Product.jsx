@@ -1,4 +1,4 @@
-const Product = ({ product }) => {
+const Product = ({ product, onDelete }) => {
   const { _id, photo, name, description, price, category, manufacturer } =
     product;
 
@@ -7,8 +7,14 @@ const Product = ({ product }) => {
       method: "DELETE",
     })
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data);
+        if (data.deletedCount > 0) {
+          onDelete(id);
+        }
+      });
   };
+
   return (
     <div className="card bg-base-100 shadow-xl">
       <figure>
