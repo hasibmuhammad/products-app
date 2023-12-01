@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
 
@@ -31,9 +31,23 @@ const run = async () => {
     const productCollection = client.db("productsDB").collection("products");
 
     // MondoDB Routes
+    app.get("/products", async (req, res) => {
+      const products = await productCollection.find().toArray();
+      res.send(products);
+    });
+
     app.post("/add", async (req, res) => {
       const product = await req.body;
       const result = await productCollection.insertOne(product);
+      res.send(result);
+    });
+
+    app.delete("/products/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const query = { _id: new ObjectId(id) };
+      const result = await productCollection.deleteOne(query);
+
       res.send(result);
     });
   } finally {
