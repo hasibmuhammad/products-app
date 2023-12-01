@@ -50,6 +50,43 @@ const run = async () => {
 
       res.send(result);
     });
+
+    app.get("/products/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const query = { _id: new ObjectId(id) };
+      const result = await productCollection.findOne(query);
+
+      res.send(result);
+    });
+
+    // update
+    app.put("/products/:id", async (req, res) => {
+      const id = req.params.id;
+
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const product = await req.body;
+
+      const newProduct = {
+        $set: {
+          name: product.name,
+          category: product.category,
+          manufacturer: product.manufacturer,
+          price: product.price,
+          description: product.description,
+          photo: product.photo,
+        },
+      };
+
+      const result = await productCollection.updateOne(
+        filter,
+        newProduct,
+        options
+      );
+
+      res.send(result);
+    });
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();

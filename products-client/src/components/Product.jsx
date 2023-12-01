@@ -1,6 +1,10 @@
+import { Link } from "react-router-dom";
+
 const Product = ({ product, onDelete }) => {
   const { _id, photo, name, description, price, category, manufacturer } =
     product;
+
+  console.log(_id);
 
   const handleDelete = (id) => {
     fetch(`http://localhost:5000/products/${id}`, {
@@ -24,8 +28,12 @@ const Product = ({ product, onDelete }) => {
         <h2 className="card-title">{name}</h2>
         <p>{description}</p>
         <div className="card-actions justify-start">
-          <button className="btn btn-primary">View</button>
-          <button className="btn btn-success">Edit</button>
+          <Link to={`/products/${_id}`}>
+            <button className="btn btn-primary">View</button>
+          </Link>
+          <Link to={`/update/${_id}`}>
+            <button className="btn btn-success">Edit</button>
+          </Link>
           <button onClick={() => handleDelete(_id)} className="btn btn-error">
             Delete
           </button>
