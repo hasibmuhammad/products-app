@@ -33,8 +33,8 @@ const run = async () => {
     // MondoDB Routes
     app.post("/add", async (req, res) => {
       const product = await req.body;
-
-      res.send(product);
+      const result = await productCollection.insertOne(product);
+      res.send(result);
     });
   } finally {
     // Ensures that the client will close when you finish/error

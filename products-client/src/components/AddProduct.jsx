@@ -1,8 +1,34 @@
 const AddProduct = () => {
+  const handleAddProduct = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const category = form.category.value;
+    const manufacturer = form.manufacturer.value;
+    const price = form.price.value;
+    const description = form.description.value;
+    const photo = form.photo.value;
+
+    const product = { name, category, manufacturer, price, description, photo };
+
+    fetch(`http://localhost:5000/add`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          alert("Product Added Successfully!");
+        }
+      });
+  };
   return (
-    <div className="p-24 bg-lime-50">
+    <div className="p-14 bg-lime-50">
       <h1 className="text-5xl font-extrabold">Add a product</h1>
-      <form action="" className="my-10 space-y-5">
+      <form onSubmit={handleAddProduct} className="my-10 space-y-5">
         <div className="md:flex gap-10">
           <div className="md:w-1/2">
             <label className="font-semibold">
