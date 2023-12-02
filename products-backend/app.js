@@ -54,6 +54,23 @@ const run = async () => {
       res.send(result);
     });
 
+    // update user upon login
+    app.patch("/users", async (req, res) => {
+      const user = await req.body;
+
+      const filter = { email: user.email };
+
+      const newInfo = {
+        $set: {
+          lastLoggedInAt: user.lastLoggedInAt,
+        },
+      };
+
+      const result = await userCollection.updateOne(filter, newInfo);
+
+      res.send(result);
+    });
+
     // Products Routes
     app.get("/products", async (req, res) => {
       const products = await productCollection.find().toArray();
