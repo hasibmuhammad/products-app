@@ -29,8 +29,17 @@ const run = async () => {
 
     // Creating the productCollection
     const productCollection = client.db("productsDB").collection("products");
+    const userCollection = client.db("productsDB").collection("users");
 
-    // MondoDB Routes
+    // Users Routes
+    app.post("/adduser", async (req, res) => {
+      const user = await req.body;
+      const result = await userCollection.insertOne(user);
+
+      res.send(result);
+    });
+
+    // Products Routes
     app.get("/products", async (req, res) => {
       const products = await productCollection.find().toArray();
       res.send(products);

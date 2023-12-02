@@ -15,7 +15,30 @@ const SignUp = () => {
     signUp(email, password)
       .then((res) => {
         if (res.user) {
+          console.log(res.user);
           alert("Sign up successfull!");
+
+          const newEmail = res.user.email;
+          const createdAt = res.user.metadata.creationTime;
+
+          const newUser = { newEmail, createdAt };
+
+          // Send data to the database
+          fetch("http://localhost:5000/adduser", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(newUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.insertedId) {
+                console.log(data);
+                alert("Data inserted in DB!");
+              }
+            });
+
           form.reset();
         }
       })
