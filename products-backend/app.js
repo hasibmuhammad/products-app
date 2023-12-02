@@ -1,6 +1,6 @@
-const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const express = require("express");
 const cors = require("cors");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const app = express();
 
@@ -134,6 +134,10 @@ const run = async () => {
   }
 };
 run().catch(console.dir);
+
+app.get("/", (req, res) => {
+  res.send("welcome to products backend!");
+});
 
 // Server initialization
 app.listen(port, () => {
