@@ -1,4 +1,26 @@
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+
 const SignIn = () => {
+  const { signIn } = useContext(AuthContext);
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    // Sign In
+    signIn(email, password)
+      .then((res) => {
+        if (res.user) {
+          alert("Yay! You are signed in!");
+        }
+      })
+      .catch((error) => console.error(error));
+  };
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -11,7 +33,7 @@ const SignIn = () => {
           </p>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body">
+          <form className="card-body" onSubmit={handleSignIn}>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
