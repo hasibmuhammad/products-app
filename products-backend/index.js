@@ -11,7 +11,7 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 // MongoDB
-const uri = process.env.MONGO_URI;
+const uri = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.er9gvke.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
