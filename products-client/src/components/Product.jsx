@@ -7,7 +7,7 @@ const Product = ({ product, onDelete }) => {
   console.log(_id);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://products-backend-iota.vercel.app/products/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

@@ -11,7 +11,7 @@ const AddProduct = () => {
 
     const product = { name, category, manufacturer, price, description, photo };
 
-    fetch(`http://localhost:5000/add`, {
+    fetch(`https://products-backend-iota.vercel.app/add`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

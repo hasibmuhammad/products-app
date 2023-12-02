@@ -19,7 +19,7 @@ const SignIn = () => {
             email: res.user.email,
             lastLoggedInAt: res.user.metadata.lastSignInTime,
           };
-          fetch("http://localhost:5000/users", {
+          fetch("https://products-backend-iota.vercel.app/users", {
             method: "PATCH",
             headers: {
               "content-type": "application/json",

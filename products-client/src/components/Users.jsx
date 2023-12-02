@@ -6,7 +6,7 @@ const Users = () => {
   const [users, setUsers] = useState(loadedUsers);
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://products-backend-iota.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())

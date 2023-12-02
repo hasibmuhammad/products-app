@@ -20,19 +20,24 @@ export const router = createBrowserRouter([
       {
         path: "/products",
         element: <Products />,
-        loader: () => fetch(`http://localhost:5000/products`),
+        loader: () =>
+          fetch(`https://products-backend-iota.vercel.app/products`),
       },
       {
         path: "/products/:id",
         element: <DetailProduct />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`),
+          fetch(
+            `https://products-backend-iota.vercel.app/products/${params.id}`
+          ),
       },
       {
         path: "/update/:id",
         element: <Update />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/products/${params.id}`),
+          fetch(
+            `https://products-backend-iota.vercel.app/products/${params.id}`
+          ),
       },
       {
         path: "/signup",
@@ -45,7 +50,7 @@ export const router = createBrowserRouter([
       {
         path: "/users",
         element: <Users />,
-        loader: () => fetch("http://localhost:5000/users"),
+        loader: () => fetch("https://products-backend-iota.vercel.app/users"),
       },
     ],
   },

@@ -24,7 +24,7 @@ const SignUp = () => {
           const newUser = { email: newEmail, createdAt: createdAt };
 
           // Send data to the database
-          fetch("http://localhost:5000/adduser", {
+          fetch("https://products-backend-iota.vercel.app/adduser", {
             method: "POST",
             headers: {
               "content-type": "application/json",

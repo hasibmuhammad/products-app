@@ -15,13 +15,16 @@ const Update = () => {
 
     const product = { name, category, manufacturer, price, description, photo };
 
-    fetch(`http://localhost:5000/products/${loadedProduct._id}`, {
-      method: "PUT",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(product),
-    })
+    fetch(
+      `https://products-backend-iota.vercel.app/products/${loadedProduct._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(product),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
