@@ -39,6 +39,11 @@ const run = async () => {
       res.send(result);
     });
 
+    app.get("/users", async (req, res) => {
+      const users = await userCollection.find().toArray();
+      res.send(users);
+    });
+
     // Products Routes
     app.get("/products", async (req, res) => {
       const products = await productCollection.find().toArray();

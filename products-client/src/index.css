@@ -1,3 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+a.active {
+  color: orange;
+  border-bottom: 4px solid orange;
+  font-weight: bold;
+}

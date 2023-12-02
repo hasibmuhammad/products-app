@@ -21,7 +21,7 @@ const SignUp = () => {
           const newEmail = res.user.email;
           const createdAt = res.user.metadata.creationTime;
 
-          const newUser = { newEmail, createdAt };
+          const newUser = { email: newEmail, createdAt: createdAt };
 
           // Send data to the database
           fetch("http://localhost:5000/adduser", {
