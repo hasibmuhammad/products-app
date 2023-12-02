@@ -1,8 +1,21 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 const Users = () => {
-  const users = useLoaderData();
-  console.log(users);
+  const loadedUsers = useLoaderData();
+  const [users, setUsers] = useState(loadedUsers);
+
+  const handleDelete = (id) => {
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          setUsers(users.filter((user) => user._id !== id));
+        }
+      });
+  };
   return (
     <div className="p-14">
       <h1 className="text-5xl font-extrabold ">All Users</h1>
@@ -23,11 +36,11 @@ const Users = () => {
                 <th>{i + 1}</th>
                 <td>{user.email}</td>
                 <td>{user.createdAt}</td>
-                <td className="flex gap-4">
-                  <button className="btn btn-xs btn-warning text-white hover:bg-black">
-                    Edit
-                  </button>
-                  <button className="btn btn-xs btn-error text-white hover:bg-black">
+                <td>
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="btn btn-xs btn-error text-white hover:bg-black"
+                  >
                     Delete
                   </button>
                 </td>

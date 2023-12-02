@@ -44,6 +44,16 @@ const run = async () => {
       res.send(users);
     });
 
+    // delete user
+    app.delete("/users/:id", async (req, res) => {
+      const id = req.params.id;
+      const filter = { _id: new ObjectId(id) };
+
+      const result = await userCollection.deleteOne(filter);
+
+      res.send(result);
+    });
+
     // Products Routes
     app.get("/products", async (req, res) => {
       const products = await productCollection.find().toArray();
