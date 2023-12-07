@@ -7,6 +7,7 @@ import SignIn from "../components/SignIn";
 import SignUp from "../components/SignUp";
 import Users from "../components/Users";
 import Root from "../layouts/Root";
+import Todo from "../components/Todo";
 
 export const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
         path: "/users",
         element: <Users />,
         loader: () => fetch("https://products-backend-iota.vercel.app/users"),
+      },
+      {
+        path: "/todos",
+        element: <Todo />,
       },
     ],
   },
